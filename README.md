@@ -1,7 +1,8 @@
 # knowledge_representation_reasoning
 
-
 ------------------------------------ Below Instruction are only for ubuntu system ------------------------------------
+
+Make sure python_version >= 3.8 has been already installed in your system
 
 This code is based on John Conway's Game of Life
 
