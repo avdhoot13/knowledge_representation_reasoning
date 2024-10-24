@@ -11,7 +11,6 @@ states = [ALIVE, DEAD, AGAIN_COME_ALIVE]
 
 
 def randomGrid(N):
-    print("#################################### Random grid #######################################")
     # return np.random.choice(states, N*N, p=[0.2, 0.7, 0.1]).reshape(N, N)
     grid = np.zeros((N, N), dtype=[('state', np.int8), ('generation', np.int32)])
     states = np.random.choice([ALIVE, DEAD, AGAIN_COME_ALIVE], N*N, p=[0.2, 0.7, 0.1]).reshape(N, N)
@@ -39,7 +38,6 @@ def update_grid(grid):
     for i in range(N):
         for j in range(N):
             alive_neighbors = count_neighbors(grid, i, j, N)
-            # Apply rules based on the current state
             if grid[i, j]['state'] == ALIVE:
                 if alive_neighbors < 2 or alive_neighbors > 3:
                     new_grid[i, j]['state'] = DEAD
@@ -75,14 +73,15 @@ def start(event):
     anim.event_source.start()
     anim_running = True
 
+
 def stop(event):
     global anim_running
     anim.event_source.stop()
     anim_running = False
 
+
 def exit(event):
     plt.close()
-
 
 
 
@@ -90,9 +89,6 @@ def update(frame, img, grid, N, status_text):
     print("--------------------------------- inside update function ------------------------------------------")
     print("--------------------------------- grid ------------------------------------------", grid)
     new_grid, total_generation = update_grid(grid)
-    
-    print("----------------------------------------- new grid ----------------------------------------------", new_grid)
-
     img.set_data(new_grid['state'])
     grid[:] = new_grid[:]
     
@@ -123,7 +119,6 @@ start_button.on_clicked(start)
 stop_button.on_clicked(stop)
 exit_button.on_clicked(exit)
 
-print("################################# 3 ##########################################")
 
 # Create the animation
 anim_running = True
